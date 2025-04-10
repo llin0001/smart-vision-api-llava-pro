@@ -1,6 +1,22 @@
-FROM python:3.10-slim
+# Use PyTorch image with CUDA
+FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
+
 WORKDIR /app
+
+# Install dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application
 COPY . .
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+EXPOSE 8080
+
+# Use Gunicorn with UvicornWorker for async FastAPI app
+CMD ["gunicorn", "main:app", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8080", "--workers=1"]
+
+# build docker
+# docker build -f docker/Dockerfile.api -t smart-vision-api .
+# run docker
+# docker run --rm -p 8080:8080 smart-vision-api
+
