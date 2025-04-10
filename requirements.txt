@@ -6,3 +6,4 @@ torch
 python-multipart
 mlflow
 prometheus_client
+gunicorn
