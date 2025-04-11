@@ -10,10 +10,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8000
 
 # Use Gunicorn with UvicornWorker for async FastAPI app
-CMD ["gunicorn", "main:app", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8080", "--workers=1"]
+CMD ["gunicorn", "main:app", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "--workers=1"]
 
 # build docker
 # docker build -f docker/Dockerfile.api -t smart-vision-api .
