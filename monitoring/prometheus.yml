@@ -2,6 +2,6 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'fastapi'
+  - job_name: 'smart-vision-api'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: ['api:8000'] # be consistent with the port exposed in docker-compose.yml    

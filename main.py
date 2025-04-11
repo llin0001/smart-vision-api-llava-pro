@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Smart Vision API (LLaVA-Pro)")
+
+# After app creation
+Instrumentator().instrument(app).expose(app)
 
 app.add_middleware(
     CORSMiddleware,
