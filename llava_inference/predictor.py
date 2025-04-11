@@ -29,9 +29,9 @@ def llava_caption(image: Image.Image) -> str:
     Generate a caption for the given image.
     """
     prompt = f"USER: <image>\nDescribe the content of this image. ASSISTANT:"
-    #result = llava_generate(image, prompt)
+    result = llava_generate(image, prompt)
 
-    result = "llava_caption"
+    #result = "llava_caption"
 
     return result
 
@@ -40,8 +40,8 @@ def llava_answer(image: Image.Image, question: str) -> str:
     Answer a question about the given image.
     """
     prompt = f"USER: <image>\n{question} ASSISTANT:"
-    #result = llava_generate(image, prompt)
-    result = "llava_answer"
+    result = llava_generate(image, prompt)
+    #result = "llava_answer"
     return result        
 
 def llava_tags(image: Image.Image) -> list[str]:
@@ -50,9 +50,10 @@ def llava_tags(image: Image.Image) -> list[str]:
     """
     
     prompt = f"USER: <image>\nList keywords that describe this image. ASSISTANT:"
-    # response = llava_generate(image, prompt)
-    # tags = [tag.strip() for tag in response.replace(".", "").split(",")]
+    response = llava_generate(image, prompt)
+    tags = [tag.strip() for tag in response.replace(".", "").split(",")]
+    result = tags
 
-    result = "llava_tags"    
+    #result = "llava_tags"    
 
     return result

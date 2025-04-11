@@ -1,19 +1,20 @@
-# Use PyTorch image with CUDA
+# Base image with PyTorch + CUDA (match your GPU setup)
 FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 
 WORKDIR /app
 
-# Install dependencies
+# Install Python deps
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application
+# Copy code
 COPY . .
 
+# Expose the app port
 EXPOSE 8000
 
-# Use Gunicorn with UvicornWorker for async FastAPI app
 CMD ["gunicorn", "main:app", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "--workers=1"]
+
 
 # build docker
 # docker build -f docker/Dockerfile.api -t smart-vision-api .
