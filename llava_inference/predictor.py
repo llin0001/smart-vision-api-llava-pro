@@ -6,7 +6,7 @@ import torch
 model_id = "llava-hf/llava-1.5-7b-hf"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = LlavaForConditionalGeneration.from_pretrained(model_id).to(device)
+model = LlavaForConditionalGeneration.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
 processor = AutoProcessor.from_pretrained(model_id)
 
 def llava_generate(image: Image.Image, prompt: str) -> str:
